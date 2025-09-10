@@ -1,4 +1,4 @@
-git clone https://github.com/ajithnellikottkrishnadas/ToDo_internship.git
+git clone https://github.com/ajithnellikottkrishnadas/ToDo_internship.git   or download the file
 cd ToDo_internship
 
 -------------------------------------
