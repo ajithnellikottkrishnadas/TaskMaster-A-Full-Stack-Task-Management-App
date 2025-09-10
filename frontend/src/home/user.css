@@ -1,0 +1,110 @@
+.addUser {
+  background: #fff;
+  padding: 25px 35px;
+  margin: 60px auto;
+  width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.addUser h3 {
+  margin-bottom: 25px;
+  color: #333;
+  font-size: 1.8em;
+  font-weight: 600;
+}
+
+.inputGroup {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-weight: 500;
+  font-size: 1em;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  outline: none;
+  font-size: 1em;
+  transition: border-color 0.3s ease;
+  background-color: #fafafa;
+}
+
+.inputGroup input:focus {
+  border-color: #f5ba13;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(245, 186, 19, 0.1);
+}
+
+.inputGroup input::placeholder {
+  color: #999;
+}
+
+.addUser form button[type="submit"] {
+  width: 100%;
+  background: linear-gradient(135deg, #f5ba13, #e0a800);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  margin-top: 15px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.addUser form button[type="submit"]:hover {
+  background: linear-gradient(135deg, #e0a800, #cc9600);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(245, 186, 19, 0.3);
+}
+.registerBtn {
+  background: linear-gradient(135deg, #333, #555);
+  color: #fff;
+  width: 100%;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+.registerBtn:hover {
+  background: linear-gradient(135deg, #555, #777);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+.addUser a {
+  text-decoration: none;
+}
+.addUser p {
+  color: #666;
+  margin-bottom: 10px;
+  font-size: 0.95em;
+}
+
+
+@media (max-width: 500px) {
+  .addUser {
+    width: 90%;
+    padding: 20px;
+    margin: 40px auto;
+  }
+  
+  .addUser h3 {
+    font-size: 1.5em;
+  }
+}

@@ -4,9 +4,7 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true, // Prevent duplicate emails
-    lowercase: true, // Store emails in lowercase
-    trim: true
+    unique: true
   },
   name: {
     type: String,
