@@ -1,3 +1,8 @@
+git clone https://github.com/ajithnellikottkrishnadas/ToDo_internship.git
+cd ToDo_internship
+
+-------------------------------------
+
 go to backend folder 
 
 cd backend
