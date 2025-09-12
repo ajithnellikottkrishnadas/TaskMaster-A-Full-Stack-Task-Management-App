@@ -11,7 +11,7 @@ npm install
 create .env file and paste code below ( for that touch .env )
 
 PORT=8000
-MONGO_URL=your_mongodb_connection_string
+MONGO_URL="mongodb://localhost:27017/ToDoApp"
 JWT_SECRET=your_secret_key
 
 npm start
