@@ -1,4 +1,4 @@
-git clone https://github.com/ajithnellikottkrishnadas/ToDo_internship.git   or download the file
+git clone https://github.com/ajithnellikottkrishnadas/TaskMaster-A-Full-Stack-Task-Management-App.git  or download the file
 cd ToDo_internship
 
 -------------------------------------
