@@ -5,6 +5,7 @@ import Login from "./home/Login.jsx";
 import Register from "./home/Register.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import Header from "./components/Header.jsx";
 
 
 
@@ -18,6 +19,7 @@ function App() {
   ]);
   return (
     <div>
+      <Header />
       <RouterProvider router={route} />
       <Toaster position="top-right" />
     </div>

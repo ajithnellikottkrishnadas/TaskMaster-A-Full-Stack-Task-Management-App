@@ -19,6 +19,12 @@
   margin-bottom: 20px;
   text-align: left;
 }
+header {
+  background-color: #f5ba13;
+  margin: auto -16px;
+  padding: 16px 32px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+}
 
 .inputGroup label {
   display: block;
@@ -29,7 +35,7 @@
 }
 
 .inputGroup input {
-  width: 100%;
+  width: 92%;
   padding: 12px 15px;
   border: 2px solid #e0e0e0;
   border-radius: 8px;

@@ -1,83 +1,115 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import toast from "react-hot-toast";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Button } from "@mui/material";
-import "../App.css";
 
 const GetTasks = () => {
-  const [tasks, setTasks] = useState([]);
+  const [myTasks, setMyTasks] = useState([]);
+  const [assignedToMe, setAssignedToMe] = useState([]);
+  const [assignedByMe, setAssignedByMe] = useState([]);
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
-
+  
   useEffect(() => {
     const fetchTasks = async () => {
+      const token = localStorage.getItem("token");
       if (!token) return navigate("/");
       try {
         const res = await axios.get("http://localhost:8000/api/user/list/get", {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setTasks(res.data);
+        setMyTasks(res.data.myTasks);
+        setAssignedToMe(res.data.assignedToMe);
+        setAssignedByMe(res.data.assignedByMe);
       } catch {
         toast.error("Failed to get tasks");
         navigate("/");
       }
     };
     fetchTasks();
-  }, [navigate, token]);
+  }, [navigate]);
 
   const deleteTask = async (id) => {
+    const token = localStorage.getItem("token");
     try {
       await axios.delete(`http://localhost:8000/api/user/list/delete/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Task deleted");
-      setTasks((prev) => prev.filter((task) => task._id !== id));
+      setMyTasks((prev) => prev.filter((task) => task._id !== id));
+      setAssignedByMe((prev) => prev.filter((task) => task._id !== id));
     } catch {
       toast.error("Failed to delete task");
     }
   };
 
-  
   const handleLogout = () => {
-    localStorage.removeItem("token"); 
+    localStorage.removeItem("token");
     toast.success("Logged out successfully!");
     navigate("/");
   };
 
   return (
     <div className="task-dashboard">
-      <div className="task-header">
-        <h2>Tasks Dashboard</h2>
-        <div style={{ display: "flex", gap: "10px" }}>
-          <Button variant="contained" color="success" onClick={() => navigate("/addTask")}>
-            Add Task
-          </Button>
-          <Button variant="outlined" color="error" onClick={handleLogout}>
-            Logout
-          </Button>
-        </div>
-      </div>
+      <div className="task-column">
+        <h2>Assigned to Me</h2>
 
-      {tasks.length === 0 && <p>No tasks found.</p>}
-
-      <div className="taskList">
-        {tasks.map((task) => (
+        <h3>My Tasks</h3>
+        {myTasks.length === 0 && <p>No tasks found.</p>}
+        {myTasks.map((task) => (
           <div key={task._id} className="taskContainer">
             <div className="taskContent">
               <h3 className="taskTitle">{task.title}</h3>
               <p className="taskDescription">{task.description}</p>
-              <small>Status: {task.status}</small>
+              <div className="taskMeta">
+                <small className="taskStatus">Status: {task.status}</small>
+              </div>
             </div>
             <div className="taskActions">
-              <button className="edit" onClick={() => navigate(`/updateTask/${task._id}`)}>
-                <EditIcon />
-              </button>
-              <button className="delete" onClick={() => deleteTask(task._id)}>
-                <DeleteIcon />
-              </button>
+              <button className="edit" onClick={() => navigate(`/updateTask/${task._id}`)}>Edit</button>
+              <button className="delete" onClick={() => deleteTask(task._id)}>Delete</button>
+            </div>
+          </div>
+        ))}
+
+        <h3>Assigned by Others</h3>
+        {assignedToMe.length === 0 && <p>No tasks assigned by others.</p>}
+        {assignedToMe.map((task) => (
+          <div key={task._id} className="taskContainer">
+            <div className="taskContent">
+              <h3 className="taskTitle">{task.title}</h3>
+              <p className="taskDescription">{task.description}</p>
+              <div className="taskMeta">
+                <small className="taskStatus">Status: {task.status}</small>
+                <small className="taskAssigned">Assigned by: {task.createdBy?.name}</small>
+              </div>
+            </div>
+            <div className="taskActions">
+              <button className="edit" onClick={() => navigate(`/updateTask/${task._id}`)}>Edit</button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="task-column">
+        <div className="task-header">
+          <h2>Assigned to Others</h2>
+          <button onClick={() => navigate("/addTask")}>Add Task</button>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+        {assignedByMe.length === 0 && <p>No tasks assigned to others.</p>}
+        {assignedByMe.map((task) => (
+          <div key={task._id} className="taskContainer">
+            <div className="taskContent">
+              <h3 className="taskTitle">{task.title}</h3>
+              <p className="taskDescription">{task.description}</p>
+              <div className="taskMeta">
+                <small className="taskStatus">Status: {task.status}</small>
+                <small className="taskAssigned">Assigned to: {task.assignedTo?.name}</small>
+              </div>
+            </div>
+            <div className="taskActions">
+              <button className="edit" onClick={() => navigate(`/updateTask/${task._id}`)}>Edit</button>
+              <button className="delete" onClick={() => deleteTask(task._id)}>Delete</button>
             </div>
           </div>
         ))}

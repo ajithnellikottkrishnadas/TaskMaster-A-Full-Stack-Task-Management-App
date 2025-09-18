@@ -5,7 +5,6 @@ import authRoutes from "./routes/authRoutes.js";
 import listRoutes from "./routes/listRoutes.js";
 import cors from "cors";
 
-
 const app = express();
 dotenv.config();
 app.use(express.json());
@@ -27,7 +26,6 @@ mongoose
         console.log("Db connected succesfully");
         app.listen(PORT, () => {
             console.log(`Server is running on port: ${PORT}`);
-
         });
     })
     .catch((error) => console.log(error));
